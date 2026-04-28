@@ -1,0 +1,72 @@
+Table Buildings {
+  id int [pk]
+  name varchar
+}
+
+Table Faculties {
+  id int [pk]
+  name varchar
+}
+
+Table Roles {
+  id int [pk]
+  name varchar
+}
+
+Table Classrooms {
+  id int [pk]
+  name varchar
+  building_id int [ref: > Buildings.id]
+}
+
+Table schedules {
+  id int [pk]
+  day varchar
+  start_time varchar
+  end_time varchar
+}
+
+Table Programs {
+  id int [pk]
+  name varchar
+  faculty_id int [ref: > Faculties.id]
+}
+
+Table Courses {
+  id int [pk]
+  name varchar
+  faculty_id int [ref: > Faculties.id]
+}
+
+Table Students {
+  id int [pk]
+  nombre varchar
+  apellido varchar
+  rol_id int [ref: > Roles.id]
+}
+
+Table course_schedule {
+  id int [pk]
+  course_id int [ref: > Courses.id]
+  schedule_id int [ref: > schedules.id]
+  classroom_id int [ref: > Classrooms.id]
+  teacher_id int
+  capacity int
+}
+
+Table Program_courses {
+  course_id int [ref: > Courses.id]
+  pensum_semester int
+  program_id int [ref: > Programs.id]
+}
+
+Table Students_program {
+  student_id int [ref: > Students.id]
+  name varchar
+  program_id int [ref: > Programs.id]
+}
+
+Table Students_courses {
+  schedule_id int [ref: > course_schedule.id]
+  student_id int [ref: > Students.id]
+}
